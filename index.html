@@ -4,22 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Consumidor de API - Fetch vs Axios</title>
-    <!--estilos -->
+    <!--estilos css -->
     <link rel="stylesheet" href="styles.css">
 
-    <!-- Importamos Axios por CDN -->
+    <!-- Importamos Axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
 
-    <!--El contenedor principal que encapsula todo -->
+    <!--contenedor principal -->
     <div class="container">
         
-        <!--El encabezado de la pagina -->
+      
         <header>
-            <h1>Buscador de Publicaciones</h1>
+            <h1>Buscador de publicaciones: </h1>
             
-            <!--Seccion de controles de interaccion -->
             <div class="controls">
                 <select id="apiSelection">
                     <option value="fetch">Usar Fetch</option>
@@ -32,16 +31,16 @@
             </div>
         </header>
 
-        <!--Indicador de carga (empieza oculto con .hidden) -->
+        <!--cargando.. (empieza oculto) -->
         <div id="loading" class="hidden">Cargando datos...</div>
 
-        <!--Mensaje de error (empieza oculto) -->
+        <!--Mensaje error (empieza oculto) -->
         <div id="error" class="hidden"></div>
 
-        <!--Seccion principal donde iran las tarjetas de resultados -->
+        <!--iran las tarjetas de resultados-->
         <main id="results"></main>
 
-        <!--Seccion de navegacion para los botones de pagina -->
+        <!--seccion de navegacion,botones de pagina-->
         <nav id="pagination"></nav>
 
     </div>

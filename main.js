@@ -1,9 +1,8 @@
 //La direccion de donde vamos a sacar las publicaciones
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
-//Variables para las paginas(empezamos en pagina 1 y mostraremos 10 por página)
-let paginaActual = 1; //let, porque cambiar//recordar en que pagina estamos
-const elementosPorPagina = 10; //10 elementos por pagina 
+let paginaActual = 1; 
+const elementosPorPagina = 10; 
 
 //Puentes con mi html, busca id y lo guarda en variable 
 const apiSelection = document.getElementById('apiSelection');
@@ -26,32 +25,32 @@ function ocultarCargando() {
     loadingElement.classList.add('hidden'); //Lo vuelve a esconder.
 }
 
-// MUESTRA ERROR en la pantalla
+// MUESTRA ERROR en pantalla
 function mostrarError(texto) {
     errorElement.textContent = texto;
     errorElement.classList.remove('hidden');
 }
 
-// OCULTA ERROR en la pantalla
+// OCULTA ERROR en pantalla
 function ocultarError() {
     errorElement.classList.add('hidden');
 }
 
 // DISPARADOR: BOTON //
 
-// Cuando hace clic en el botOn, ejecutamos esta funcion
+//clic en el boton, ejecuto funcion vacia
 fetchButton.addEventListener('click', function() {
     
-    // Miramos si el usuario eligió "axios" en el menú
+    // Miramos si el usuario eligio "axios" en el menú
     const esAxios = apiSelection.value === 'axios';
-    // Guardamos lo que escribió en la barra de búsqueda
+    // Guardamos lo que escribio en la barra de busqueda
     const texto = searchInput.value;
 
     // Mostramos el letrero de carga y borramos errores antiguos
     mostrarCargando();
     ocultarError();
 
-    // Si eligió Axios, usamos Axios. Si no, usamos Fetch.
+    //Si eligio Axios, usamos Axios. Sino, fetch.
     if (esAxios) {
         fetchDataWithAxios(texto);
     } else {
@@ -59,27 +58,27 @@ fetchButton.addEventListener('click', function() {
     }
 });
 
-// --- 4. FUNCIÓN PARA USAR FETCH CON FILTRO Y PAGINACIÓN ---
+//FUNCION PARA USAR FETCH CON FILTRO Y PAGINACION
 async function fetchDataWithFetch(textoBusqueda) {
     try {
-        // 1. Creamos la URL con los súper poderes: página actual, límite y lo que queremos buscar (q)
+        //Creamos la URL : PAG actual, lim pag y lo que queremos buscar (q)
         const url = `${API_URL}?_page=${paginaActual}&_limit=${elementosPorPagina}&q=${textoBusqueda}`;
 
-        // 2. Pedimos los datos a esa URL especial
+        //Pedimos los datos a esa URL especial
         const respuesta = await fetch(url);
         
-        // Si hay algún problema con la red, avisamos
+        // Si hay algun problema con la red, avisamos
         if (!respuesta.ok) { // si es diferente de ok
             throw new Error(`Error HTTP: ${respuesta.status}`); //para errores pero no se ven ?
         }
 
-        //  Obtenemos el número total de elementos que hay en total (viene en los encabezados)
+        //Obtenemos el nUmero total de elementos que hay en total (viene en los encabezados)
         const totalItems = respuesta.headers.get('X-Total-Count');
 
-        // 4. Convertimos la respuesta en un formato que JavaScript entienda (JSON)
+        // Convertimos respuesta en formato que JavaScript entienda JSON
         const datos = await respuesta.json();
 
-        // 5. Pintamos los resultados y creamos la paginación
+        //Pintamos los resultados y creamos la paginacion
         mostrarResultados(datos, textoBusqueda);
 
     } catch (error) {
@@ -91,10 +90,10 @@ async function fetchDataWithFetch(textoBusqueda) {
     }
 }
 
-// --- 5. FUNCIÓN PARA USAR AXIOS CON FILTRO Y PAGINACIÓN ---
+//FUNCION PARA USAR AXIOS CON FILTRO 
 async function fetchDataWithAxios(textoBusqueda) {
     try {
-        // 1. Pedimos los datos usando Axios y pasándole los parámetros en un objeto
+        //Pedimos los datos usando Axios y pasandole los parametros en un objeto
         const respuesta = await axios.get(API_URL, {
             params: {
                 _page: paginaActual,
@@ -103,13 +102,13 @@ async function fetchDataWithAxios(textoBusqueda) {
             }
         });
 
-        // 2. Obtenemos el total de ítems de los encabezados de Axios
+        //Obtenemos el total de items de los encabezados de Axios
         const totalItems = respuesta.headers['x-total-count'];
 
-        // 3. Axios guarda los datos en .data
+        // Axios guarda los datos en .data
         const datos = respuesta.data;
 
-        // 4. Pintamos los resultados
+        // Pintamos los resultados
         mostrarResultados(datos, textoBusqueda);
 
     } catch (error) {
@@ -120,25 +119,28 @@ async function fetchDataWithAxios(textoBusqueda) {
     }
 }
 
-// --- 6. FUNCIÓN PARA PINTAR Y FILTRAR LOS RESULTADOS ---
+// FUNCION PARA PINTAR Y FILTRAR LOS RESULTADOS 
 function mostrarResultados(listaDePosts, textoBusqueda = '') {
     
-    // Filtramos la lista de forma estricta: nos quedamos solo con los posts cuyo título incluya lo que escribiste
+    // Filtramos la lista:nos quedamos solo con lo que escribe con filter
     const postsFiltrados = listaDePosts.filter(post => 
         post.title.toLowerCase().includes(textoBusqueda.toLowerCase())
     );
 
-    // Si después de filtrar no queda nada, avisamos
+    // Si despues de filtrar no queda nada, avisamos
     if (postsFiltrados.length === 0) {
-        resultsContainer.innerHTML = '<p>No se encontraron resultados.</p>';
+        resultsContainer.innerHTML = 
+        '<p>No se encontraron resultados.</p>';
         return;
     }
 
     // Transformamos los posts filtrados en tarjetas y los ponemos en la pantalla
     resultsContainer.innerHTML = postsFiltrados.map(post => `
         <div class="card">
+
             <h3>${post.title}</h3>
             <p>${post.body}</p>
+            
         </div>
     `).join('');
 }

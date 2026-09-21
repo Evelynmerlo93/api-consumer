@@ -1,15 +1,15 @@
-/* Estilos generales muy básicos */
+
 body{
     font-family: Arial, sans-serif;
     margin: 20px;
 }
 
-/* La única clase obligatoria: sirve para ocultar el "Cargando..." o los errores */
+/* sirve para ocultar el "Cargando" o  errores */
 .hidden{
     display: none;
 }
 
-/* Controles de arriba (inputs y botones) */
+/* (inputs y botones) */
 .controls{
     margin-bottom: 20px;
 }
@@ -17,11 +17,11 @@ body{
 .controls input, 
 .controls select, 
 .controls button{
-    padding: 8px;
-    margin-right: 5px;
+        padding: 8px;
+        margin-right: 5px;
 }
 
-/* Donde se colocan las tarjetas de resultados */
+/* Donde van las tarjetas de resultados */
 .results-grid{
     display: flex;
     flex-direction: column;
@@ -29,7 +29,7 @@ body{
     margin-top: 20px;
 }
 
-/* El diseño simple de cada tarjeta */
+/* tarjetas */
 .card{
     border: 1px solid #ccc;
     padding: 15px;
@@ -37,7 +37,7 @@ body{
     background-color: #f9f9f9;
 }
 
-/* Los botones para pasar de página */
+/* Los botones para pasar de pagina */
 .pagination{
     margin-top: 20px;
 }
