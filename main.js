@@ -80,7 +80,7 @@ async function fetchDataWithFetch(textoBusqueda) {
         const datos = await respuesta.json();
 
         // 5. Pintamos los resultados y creamos la paginación
-        mostrarResultados(datos, totalItems);
+        mostrarResultados(datos, textoBusqueda);
 
     } catch (error) {
         // Si algo falla, mostramos el error
@@ -110,7 +110,7 @@ async function fetchDataWithAxios(textoBusqueda) {
         const datos = respuesta.data;
 
         // 4. Pintamos los resultados
-        mostrarResultados(datos, totalItems);
+        mostrarResultados(datos, textoBusqueda);
 
     } catch (error) {
         // Si algo falla, mostramos el error
@@ -123,18 +123,18 @@ async function fetchDataWithAxios(textoBusqueda) {
 // --- 6. FUNCIÓN PARA PINTAR Y FILTRAR LOS RESULTADOS ---
 function mostrarResultados(listaDePosts, textoBusqueda = '') {
     
-    // 1. Filtramos la lista: nos quedamos solo con los posts cuyo título incluya lo que escribiste
+    // Filtramos la lista de forma estricta: nos quedamos solo con los posts cuyo título incluya lo que escribiste
     const postsFiltrados = listaDePosts.filter(post => 
         post.title.toLowerCase().includes(textoBusqueda.toLowerCase())
     );
 
-    // 2. Si después de filtrar no queda nada, avisamos
+    // Si después de filtrar no queda nada, avisamos
     if (postsFiltrados.length === 0) {
         resultsContainer.innerHTML = '<p>No se encontraron resultados.</p>';
         return;
     }
 
-    // 3. Transformamos los posts filtrados en tarjetas y los ponemos en la pantalla
+    // Transformamos los posts filtrados en tarjetas y los ponemos en la pantalla
     resultsContainer.innerHTML = postsFiltrados.map(post => `
         <div class="card">
             <h3>${post.title}</h3>
