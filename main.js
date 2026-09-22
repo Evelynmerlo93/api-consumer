@@ -17,17 +17,17 @@ const paginationContainer = document.getElementById('pagination');
 
 // MUESTRA "CARGANDO"
 function mostrarCargando() {
-    loadingElement.classList.remove('hidden'); //quita el escondite para que el usuario vea texto de carga
+    loadingElement.classList.remove('hidden'); //quita el cartel escondido
 }
 
 // OCULTA "CARGANDO"
 function ocultarCargando() {
-    loadingElement.classList.add('hidden'); //Lo vuelve a esconder.
+    loadingElement.classList.add('hidden'); //Vuelve a esconder el cartel 
 }
 
 // MUESTRA ERROR en pantalla
 function mostrarError(texto) {
-    errorElement.textContent = texto;
+    errorElement.textContent = texto; 
     errorElement.classList.remove('hidden');
 }
 
@@ -46,7 +46,7 @@ fetchButton.addEventListener('click', function() {
     // Guardamos lo que escribio en la barra de busqueda
     const texto = searchInput.value;
 
-    // Mostramos el letrero de carga y borramos errores antiguos
+    // Mostramos el letrero de carga y borramos errores que esten de antes( si es q los hay)
     mostrarCargando();
     ocultarError();
 
