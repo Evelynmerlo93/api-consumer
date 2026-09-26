@@ -20,4 +20,4 @@ Pequeña aplicación web desarrollada en JavaScript Vanilla que permite consumir
 
 1. Clona este repositorio en tu ordenador:
    ```bash
- git clone https://github.com/Evelynmerlo93/api-consumer.git
+   git clone [https://github.com/Evelynmerlo93/api-consumer.git](https://github.com/Evelynmerlo93/api-consumer.git)
